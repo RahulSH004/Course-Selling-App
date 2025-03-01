@@ -6,7 +6,7 @@ Ensure you have the following installed on your machine:
 - npm or yarn
 
 ## Schema Of DB
-![Alt text](public\assests\img\Schema.png)
+![Alt text](public/assests/schema.png)
 
 
 ## Installation
