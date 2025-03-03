@@ -1,7 +1,11 @@
 const {Router} = require('express');
 const adminRouter = Router();
+const {Admin} = require('../models/admin.js');
+
 
 adminRouter.post("/signup", async (req, res) => {
+    const {email, password, firstname, lastname} = req.body;
+    
 
 });
 
