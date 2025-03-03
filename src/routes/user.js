@@ -2,12 +2,12 @@ const {Router} = require('express');
 const {user} = require('../models/user.js');
 const jwt = require('jsonwebtoken');
 const JWT_USER_PASSWORD = "ABC123";
-const bycrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const userRouter = Router();
 
 userRouter.post("/signup", async (req, res) => {
     const {email, password, firstname, lastname} = req.body;
-    const hashpassword = await bycrypt.hash(password, 10);
+    const hashpassword = await bcrypt.hash(password, 10);
     try{
         await user.create({
             email: email,
@@ -37,7 +37,7 @@ userRouter.post("/login", async (req, res) => {
                 message: "Invalid email or password"
             })
         }
-        const passwordmatch = await bycrypt.compare(password, userFound.password);
+        const passwordmatch = await bcrypt.compare(password, userFound.password);
         if(passwordmatch){
             const token = jwt.sign({
                 id: userFound._id,
