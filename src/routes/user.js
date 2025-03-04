@@ -1,9 +1,9 @@
 const {Router} = require('express');
 const {user} = require('../models/user.js');
 const jwt = require('jsonwebtoken');
-const JWT_USER_PASSWORD = "ABC123";
 const bcrypt = require('bcrypt');
 const userRouter = Router();
+const {JWT_USER_PASSWORD} = require("../config.js");
 
 userRouter.post("/signup", async (req, res) => {
     const {email, password, firstname, lastname} = req.body;
@@ -63,7 +63,7 @@ userRouter.get("/courses", async (req, res) => {
 });
 
 userRouter.post("/courses/:courseid", async (req, res) => {
-
+    
 });
 
 userRouter.get("/purchased_courses", async (req, res) => {

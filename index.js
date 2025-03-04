@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 require("dotenv").config();
-require("./src/config/db");
+require("./src/config_db/db");
 const jsonwebtoken = require("jsonwebtoken");
 const { userRouter } = require("./src/routes/user");
 const {adminRouter} = require("./src/routes/admin");
