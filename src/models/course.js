@@ -10,7 +10,7 @@ const courseSchema = new Schema({
     creatorid: ObjectId
 })
 
-const purchaseSchema = Schema({
+const purchaseSchema = new Schema({
     courseid: ObjectId,
     userid: ObjectId,
     purchasedate: Date

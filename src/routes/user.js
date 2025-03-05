@@ -1,9 +1,10 @@
 const {Router} = require('express');
 const {user} = require('../models/user.js');
+const {Purchase} = require('../models/course.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const userRouter = Router();
-const {JWT_USER_PASSWORD} = require("../config.js");
+const {JWT_USER_PASSWORD} = require("../config_db/config.js");
 
 userRouter.post("/signup", async (req, res) => {
     const {email, password, firstname, lastname} = req.body;
@@ -58,16 +59,26 @@ userRouter.post("/login", async (req, res) => {
 
 });
 
-userRouter.get("/courses", async (req, res) => {
 
-});
 
-userRouter.post("/courses/:courseid", async (req, res) => {
-    
-});
-
-userRouter.get("/purchased_courses", async (req, res) => {
-    
+userRouter.get("/purchases", async (req, res) => {
+    const userId = req.userId;
+    const purchases = await Purchase.find({
+        userId,
+    })
+    let puschasecourseid = [];
+    for(let i = 0; i < purchases.length; i++){
+        puschasecourseid.push(purchases[i].courseId);
+    }
+    const courses = await Course.find({
+        _id: {
+            $in: puschasecourseid
+        }
+    })
+    res.json({
+        purchases: purchases,
+        courses: courses
+    })
 });
 
 module.exports = {
